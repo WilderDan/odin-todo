@@ -1,3 +1,25 @@
+.addItem {
+  width: clamp(300px, 100%, 800px);
+  padding: 1rem;
+}
+
 .backImg {
   width: 50px;
+  cursor: pointer;
+}
+
+.titleText,
+.descriptionText {
+  border: none;
+  outline: none;
+  padding: 1rem;
+  width: 100%;
+}
+
+.titleText {
+  font-size: 2rem;
+}
+
+.descriptionText {
+  font-size: 1rem;
 }

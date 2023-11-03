@@ -18,6 +18,19 @@ function AddItem(homeCallback) {
   controlContainer.appendChild(backImg);
   addItem.appendChild(controlContainer);
 
+  const titleText = document.createElement("input");
+  titleText.classList.add(styles.titleText);
+  titleText.type = "text";
+  titleText.placeholder = "Title";
+
+  const descriptionText = document.createElement("input");
+  descriptionText.classList.add(styles.descriptionText);
+  descriptionText.type = "text";
+  descriptionText.placeholder = "Description";
+
+  addItem.appendChild(titleText);
+  addItem.appendChild(descriptionText);
+
   function getElement() {
     return addItem;
   }

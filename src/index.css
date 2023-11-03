@@ -12,6 +12,14 @@ body {
   min-height: 100vh;
 }
 
+body {
+  display: flex;
+}
+
+body > div {
+  flex: 1;
+}
+
 a {
   text-decoration: none;
   color: inherit;

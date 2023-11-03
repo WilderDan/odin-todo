@@ -1,7 +1,7 @@
 import styles from "./home.css";
 import AddItemImageSrc from "./images/plus.svg";
 
-const Home = () => {
+function Home(addItemCallback) {
   const home = document.createElement("div");
   home.classList.add(styles.home);
 
@@ -12,12 +12,15 @@ const Home = () => {
   img.classList.add(styles.img);
   img.src = AddItemImageSrc;
   img.alt = "Add button";
+  img.addEventListener("click", addItemCallback);
 
   imgContainer.appendChild(img);
   home.appendChild(imgContainer);
 
-  const getElement = () => home;
+  function getElement() {
+    return home;
+  }
   return { getElement };
-};
+}
 
 export default Home;

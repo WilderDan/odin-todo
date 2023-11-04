@@ -1,5 +1,7 @@
 import styles from "./app.css";
 
+import Note from "../../common/note.js";
+
 import HomeState from "../homeState/homeState.js";
 import AddItemState from "../addItemState/addItemState.js";
 
@@ -7,19 +9,25 @@ function App() {
   const appElem = document.createElement("div");
   appElem.classList.add(styles.app);
 
-  const homeState = HomeState(onAddItemClick);
-  const addItemState = AddItemState(onBackClick);
+  const homeState = HomeState(changeState);
+  const addItemState = AddItemState(addItem);
 
   appElem.appendChild(homeState.getElement());
 
-  function onAddItemClick() {
+  function changeState() {
     appElem.removeChild(appElem.firstElementChild);
     appElem.appendChild(addItemState.getElement());
   }
 
-  function onBackClick(title, text) {
+  function addItem(title, desc) {
     addItemState.clear();
     appElem.removeChild(appElem.firstElementChild);
+
+    if (title !== "" || desc !== "") {
+      const note = new Note(title, desc);
+
+      console.log(note);
+    }
 
     appElem.appendChild(homeState.getElement());
   }

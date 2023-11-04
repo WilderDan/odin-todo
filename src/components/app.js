@@ -1,15 +1,15 @@
 import styles from "./app.css";
-
 import Note from "../note.js";
-
 import HomeState from "./homeState.js";
 import AddItemState from "./addItemState.js";
 
 function App() {
+  const itemList = [];
+
   const appElem = document.createElement("div");
   appElem.classList.add(styles.app);
 
-  const homeState = HomeState(changeState);
+  const homeState = HomeState(itemList, changeState);
   const addItemState = AddItemState(addItem);
 
   appElem.appendChild(homeState.getElement());
@@ -25,8 +25,8 @@ function App() {
 
     if (title !== "" || desc !== "") {
       const note = new Note(title, desc);
-
-      console.log(note);
+      itemList.push(note);
+      homeState.update(itemList);
     }
 
     appElem.appendChild(homeState.getElement());

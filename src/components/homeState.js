@@ -1,9 +1,13 @@
 import styles from "./homeState.css";
+import HomeItemContainer from "./homeItemContainer.js";
 import AddItemImageSrc from "./images/plus.svg";
 
-function HomeState(addItemCallback) {
-  const home = document.createElement("div");
-  home.classList.add(styles.home);
+function HomeState(itemList, addItemCallback) {
+  const homeElem = document.createElement("div");
+  homeElem.classList.add(styles.home);
+
+  const homeItemContainer = HomeItemContainer(itemList);
+  homeElem.appendChild(homeItemContainer.getElement());
 
   const imgContainer = document.createElement("div");
   imgContainer.classList.add(styles.imgContainer);
@@ -15,12 +19,17 @@ function HomeState(addItemCallback) {
   img.addEventListener("click", addItemCallback);
 
   imgContainer.appendChild(img);
-  home.appendChild(imgContainer);
+  homeElem.appendChild(imgContainer);
+
+  function update(list) {
+    homeItemContainer.update(list);
+  }
 
   function getElement() {
-    return home;
+    return homeElem;
   }
-  return { getElement };
+
+  return { getElement, update };
 }
 
 export default HomeState;

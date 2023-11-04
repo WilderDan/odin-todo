@@ -1,0 +1,7 @@
+.itemContainer {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 1rem;
+  justify-content: center;
+}

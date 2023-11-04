@@ -1,6 +1,6 @@
 import styles from "./homeItem.css";
 
-function HomeItem(item) {
+function HomeItem(item, editItemCallback) {
   const itemElem = document.createElement("div");
   itemElem.classList.add(styles.item);
 
@@ -12,6 +12,8 @@ function HomeItem(item) {
 
   itemElem.appendChild(title);
   itemElem.appendChild(description);
+
+  itemElem.addEventListener("click", () => editItemCallback(item.id));
 
   function getElement() {
     return itemElem;

@@ -11,14 +11,28 @@ function App() {
   const appElem = document.createElement("div");
   appElem.classList.add(styles.app);
 
+  const homeState = HomeState(itemList, changeAddState, changeEditState);
   const addItemState = AddItemState(addItem);
-  const homeState = HomeState(itemList, () => changeState(addItemState));
 
   appElem.appendChild(homeState.getElement());
 
   function changeState(state) {
     appElem.removeChild(appElem.firstElementChild);
     appElem.appendChild(state.getElement());
+  }
+
+  function changeAddState() {
+    changeState(addItemState);
+  }
+
+  function changeEditState(id) {
+    alert(id);
+    //changeState(editItemState);
+  }
+
+  function editItem(id) {
+    alert(id);
+    if (id === null) changeState(addItemState);
   }
 
   function addItem(title, desc) {

@@ -9,19 +9,18 @@ function App() {
   const appElem = document.createElement("div");
   appElem.classList.add(styles.app);
 
-  const homeState = HomeState(itemList, changeState);
   const addItemState = AddItemState(addItem);
+  const homeState = HomeState(itemList, () => changeState(addItemState));
 
   appElem.appendChild(homeState.getElement());
 
-  function changeState() {
+  function changeState(state) {
     appElem.removeChild(appElem.firstElementChild);
-    appElem.appendChild(addItemState.getElement());
+    appElem.appendChild(state.getElement());
   }
 
   function addItem(title, desc) {
     addItemState.clear();
-    appElem.removeChild(appElem.firstElementChild);
 
     if (title !== "" || desc !== "") {
       const note = new Note(title, desc);
@@ -29,7 +28,7 @@ function App() {
       homeState.update(itemList);
     }
 
-    appElem.appendChild(homeState.getElement());
+    changeState(homeState);
   }
 
   function getElement() {

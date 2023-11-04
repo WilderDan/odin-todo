@@ -1,11 +1,19 @@
 .addItem {
   width: clamp(300px, 100%, 800px);
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .backImg {
   width: 50px;
   cursor: pointer;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .titleText,
@@ -18,6 +26,11 @@
 
 .titleText {
   font-size: 2rem;
+}
+
+.descriptionText {
+  resize: none;
+  flex: 1;
 }
 
 .descriptionText {

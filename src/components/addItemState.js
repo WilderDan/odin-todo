@@ -18,18 +18,22 @@ function AddItemState(onBackClick) {
   controlContainer.appendChild(backImg);
   addItem.appendChild(controlContainer);
 
+  const textContainer = document.createElement("div");
+  textContainer.classList.add(styles.textContainer);
+
   const titleText = document.createElement("input");
   titleText.classList.add(styles.titleText);
   titleText.type = "text";
   titleText.placeholder = "Title";
 
-  const descriptionText = document.createElement("input");
+  const descriptionText = document.createElement("textarea");
   descriptionText.classList.add(styles.descriptionText);
-  descriptionText.type = "text";
   descriptionText.placeholder = "Description";
 
-  addItem.appendChild(titleText);
-  addItem.appendChild(descriptionText);
+  textContainer.appendChild(titleText);
+  textContainer.appendChild(descriptionText);
+
+  addItem.appendChild(textContainer);
 
   function handleBackClick() {
     onBackClick(titleText.value, descriptionText.value);

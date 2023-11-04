@@ -1,8 +1,8 @@
-import styles from "./addItem.css";
+import styles from "./addItemState.css";
 
 import BackImg from "./images/back.svg";
 
-function AddItem(homeCallback) {
+function AddItemState(onBackClick) {
   const addItem = document.createElement("div");
   addItem.classList.add(styles.addItem);
 
@@ -13,7 +13,7 @@ function AddItem(homeCallback) {
   backImg.classList.add(styles.backImg);
   backImg.src = BackImg;
   backImg.alt = "back button";
-  backImg.addEventListener("click", homeCallback);
+  backImg.addEventListener("click", handleBackClick);
 
   controlContainer.appendChild(backImg);
   addItem.appendChild(controlContainer);
@@ -31,11 +31,20 @@ function AddItem(homeCallback) {
   addItem.appendChild(titleText);
   addItem.appendChild(descriptionText);
 
+  function handleBackClick() {
+    onBackClick(titleText.value, descriptionText.value);
+  }
+
+  function clear() {
+    titleText.value = "";
+    descriptionText.value = "";
+  }
+
   function getElement() {
     return addItem;
   }
 
-  return { getElement };
+  return { getElement, clear };
 }
 
-export default AddItem;
+export default AddItemState;

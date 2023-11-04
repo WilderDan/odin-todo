@@ -1,29 +1,31 @@
 import styles from "./app.css";
 
-import Home from "../home/home.js";
-import AddItem from "../addItem/addItem.js";
+import HomeState from "../homeState/homeState.js";
+import AddItemState from "../addItemState/addItemState.js";
 
 function App() {
-  const app = document.createElement("div");
-  app.classList.add(styles.app);
+  const appElem = document.createElement("div");
+  appElem.classList.add(styles.app);
 
-  const home = Home(changeToAddItem);
-  const addItem = AddItem(changeToHome);
+  const homeState = HomeState(onAddItemClick);
+  const addItemState = AddItemState(onBackClick);
 
-  app.appendChild(home.getElement());
+  appElem.appendChild(homeState.getElement());
 
-  function changeToAddItem() {
-    app.removeChild(app.firstElementChild);
-    app.appendChild(addItem.getElement());
+  function onAddItemClick() {
+    appElem.removeChild(appElem.firstElementChild);
+    appElem.appendChild(addItemState.getElement());
   }
 
-  function changeToHome() {
-    app.removeChild(app.firstElementChild);
-    app.appendChild(home.getElement());
+  function onBackClick(title, text) {
+    addItemState.clear();
+    appElem.removeChild(appElem.firstElementChild);
+
+    appElem.appendChild(homeState.getElement());
   }
 
   function getElement() {
-    return app;
+    return appElem;
   }
 
   return { getElement };

@@ -1,7 +1,7 @@
-import styles from "./home.css";
+import styles from "./homeState.css";
 import AddItemImageSrc from "./images/plus.svg";
 
-function Home(addItemCallback) {
+function HomeState(addItemCallback) {
   const home = document.createElement("div");
   home.classList.add(styles.home);
 
@@ -23,4 +23,4 @@ function Home(addItemCallback) {
   return { getElement };
 }
 
-export default Home;
+export default HomeState;

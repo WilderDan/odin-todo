@@ -1,7 +1,12 @@
 class Note {
-  constructor(title, description) {
+  constructor(id, title, description) {
+    this._id = id;
     this.title = title;
     this.description = description;
+  }
+
+  get id() {
+    return this._id;
   }
 
   get title() {

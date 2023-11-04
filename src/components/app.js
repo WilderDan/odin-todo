@@ -1,9 +1,9 @@
 import styles from "./app.css";
 
-import Note from "../../common/note.js";
+import Note from "../note.js";
 
-import HomeState from "../homeState/homeState.js";
-import AddItemState from "../addItemState/addItemState.js";
+import HomeState from "./homeState.js";
+import AddItemState from "./addItemState.js";
 
 function App() {
   const appElem = document.createElement("div");

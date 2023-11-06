@@ -5,8 +5,18 @@
   flex-direction: column;
 }
 
+.controlContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
 .backImg {
   width: 50px;
+  cursor: pointer;
+}
+
+.deleteImg {
+  width: 35px;
   cursor: pointer;
 }
 

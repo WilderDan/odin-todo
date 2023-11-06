@@ -12,7 +12,7 @@ function App() {
   appElem.classList.add(styles.app);
 
   const homeState = HomeState(itemList, changeToAddState, changeToEditState);
-  const editItemState = EditItemState(handleAdd, handleEdit);
+  const editItemState = EditItemState(handleAdd, handleEdit, handleDelete);
 
   appElem.appendChild(homeState.getElement());
 
@@ -44,6 +44,12 @@ function App() {
   function handleEdit(id, title, desc) {
     getItem(id).title = title;
     getItem(id).description = desc;
+    homeState.update(itemList);
+    changeState(homeState);
+  }
+
+  function handleDelete(id) {
+    removeItem(id);
     homeState.update(itemList);
     changeState(homeState);
   }

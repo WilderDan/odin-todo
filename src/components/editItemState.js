@@ -1,8 +1,9 @@
 import styles from "./editItemState.css";
 
 import BackImg from "./images/back.svg";
+import DeleteImg from "./images/delete.svg";
 
-function EditItemState(addItemCallback, editItemCallback) {
+function EditItemState(addItemCallback, editItemCallback, deleteItemCallback) {
   let isEdit = false;
   let itemId = null;
 
@@ -18,7 +19,15 @@ function EditItemState(addItemCallback, editItemCallback) {
   backImg.alt = "back button";
   backImg.addEventListener("click", handleBackClick);
 
+  const deleteImg = document.createElement("img");
+  deleteImg.classList.add(styles.deleteImg);
+  deleteImg.src = DeleteImg;
+  deleteImg.alt = "delete button";
+  deleteImg.addEventListener("click", handleDeleteClick);
+
   controlContainer.appendChild(backImg);
+  controlContainer.appendChild(deleteImg);
+
   item.appendChild(controlContainer);
 
   const textContainer = document.createElement("div");
@@ -46,9 +55,19 @@ function EditItemState(addItemCallback, editItemCallback) {
     }
   }
 
+  function handleDeleteClick() {
+    const confirmed =
+      titleText.value === "" && descriptionText.value === ""
+        ? true
+        : confirm("Delete?");
+
+    if (confirmed) deleteItemCallback(itemId);
+  }
+
   function update(item) {
     if (item === null) {
       isEdit = false;
+      itemId = null;
       titleText.value = "";
       descriptionText.value = "";
     } else {

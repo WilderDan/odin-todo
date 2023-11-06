@@ -1,10 +1,13 @@
-import styles from "./addItemState.css";
+import styles from "./editItemState.css";
 
 import BackImg from "./images/back.svg";
 
-function AddItemState(onBackClick) {
-  const addItem = document.createElement("div");
-  addItem.classList.add(styles.addItem);
+function EditItemState(addItemCallback, editItemCallback) {
+  let isEdit = false;
+  let itemId = null;
+
+  const item = document.createElement("div");
+  item.classList.add(styles.addItem);
 
   const controlContainer = document.createElement("div");
   controlContainer.classList.add(styles.controlContainer);
@@ -16,7 +19,7 @@ function AddItemState(onBackClick) {
   backImg.addEventListener("click", handleBackClick);
 
   controlContainer.appendChild(backImg);
-  addItem.appendChild(controlContainer);
+  item.appendChild(controlContainer);
 
   const textContainer = document.createElement("div");
   textContainer.classList.add(styles.textContainer);
@@ -33,22 +36,34 @@ function AddItemState(onBackClick) {
   textContainer.appendChild(titleText);
   textContainer.appendChild(descriptionText);
 
-  addItem.appendChild(textContainer);
+  item.appendChild(textContainer);
 
   function handleBackClick() {
-    onBackClick(titleText.value, descriptionText.value);
+    if (isEdit) {
+      editItemCallback(itemId, titleText.value, descriptionText.value);
+    } else {
+      addItemCallback(titleText.value, descriptionText.value);
+    }
   }
 
-  function clear() {
-    titleText.value = "";
-    descriptionText.value = "";
+  function update(item) {
+    if (item === null) {
+      isEdit = false;
+      titleText.value = "";
+      descriptionText.value = "";
+    } else {
+      isEdit = true;
+      itemId = item.id;
+      titleText.value = item.title;
+      descriptionText.value = item.description;
+    }
   }
 
   function getElement() {
-    return addItem;
+    return item;
   }
 
-  return { getElement, clear };
+  return { getElement, update };
 }
 
-export default AddItemState;
+export default EditItemState;

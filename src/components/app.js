@@ -1,7 +1,7 @@
 import styles from "./app.css";
 import Note from "../note.js";
 import HomeState from "./homeState.js";
-import AddItemState from "./addItemState.js";
+import EditItemState from "./editItemState.js";
 
 function App() {
   const itemList = [];
@@ -11,8 +11,8 @@ function App() {
   const appElem = document.createElement("div");
   appElem.classList.add(styles.app);
 
-  const homeState = HomeState(itemList, changeAddState, changeEditState);
-  const addItemState = AddItemState(addItem);
+  const homeState = HomeState(itemList, changeToAddState, changeToEditState);
+  const editItemState = EditItemState(handleAdd, handleEdit);
 
   appElem.appendChild(homeState.getElement());
 
@@ -21,23 +21,17 @@ function App() {
     appElem.appendChild(state.getElement());
   }
 
-  function changeAddState() {
-    changeState(addItemState);
+  function changeToAddState() {
+    editItemState.update(null);
+    changeState(editItemState);
   }
 
-  function changeEditState(id) {
-    alert(id);
-    //changeState(editItemState);
+  function changeToEditState(id) {
+    editItemState.update(getItem(id));
+    changeState(editItemState);
   }
 
-  function editItem(id) {
-    alert(id);
-    if (id === null) changeState(addItemState);
-  }
-
-  function addItem(title, desc) {
-    addItemState.clear();
-
+  function handleAdd(title, desc) {
     if (title !== "" || desc !== "") {
       const note = new Note(currentId++, title, desc);
       itemList.push(note);
@@ -45,6 +39,18 @@ function App() {
     }
 
     changeState(homeState);
+  }
+
+  function handleEdit(id, title, desc) {
+    getItem(id).title = title;
+    getItem(id).description = desc;
+    homeState.update(itemList);
+    changeState(homeState);
+  }
+
+  function getItem(id) {
+    const findIndex = itemList.findIndex((e) => e.id === id);
+    return itemList[findIndex];
   }
 
   function removeItem(id) {

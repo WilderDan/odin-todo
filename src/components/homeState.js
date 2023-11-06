@@ -2,11 +2,15 @@ import styles from "./homeState.css";
 import HomeItemContainer from "./homeItemContainer.js";
 import AddItemImageSrc from "./images/plus.svg";
 
-function HomeState(itemList, addItemCallback, editItemCallback) {
+function HomeState(itemList, addItemCallback, editItemCallback, pinCallback) {
   const homeElem = document.createElement("div");
   homeElem.classList.add(styles.home);
 
-  const homeItemContainer = HomeItemContainer(itemList, editItemCallback);
+  const homeItemContainer = HomeItemContainer(
+    itemList,
+    editItemCallback,
+    pinCallback
+  );
   homeElem.appendChild(homeItemContainer.getElement());
 
   const imgContainer = document.createElement("div");

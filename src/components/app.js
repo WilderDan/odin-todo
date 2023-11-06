@@ -11,13 +11,13 @@ function App() {
   const appElem = document.createElement("div");
   appElem.classList.add(styles.app);
 
-  const homeState = HomeState(itemList, changeToAddState, changeToEditState);
-  const editItemState = EditItemState(
-    handleAdd,
-    handleEdit,
-    handleDelete,
+  const homeState = HomeState(
+    itemList,
+    changeToAddState,
+    changeToEditState,
     handlePin
   );
+  const editItemState = EditItemState(handleAdd, handleEdit, handleDelete);
 
   appElem.appendChild(homeState.getElement());
 
@@ -60,7 +60,11 @@ function App() {
     changeState(homeState);
   }
 
-  function handlePin(id) {}
+  function handlePin(id) {
+    const item = getItem(id);
+    getItem(id).isPinned = !getItem(id).isPinned;
+    homeState.update(itemList);
+  }
 
   function getItem(id) {
     const findIndex = itemList.findIndex((e) => e.id === id);

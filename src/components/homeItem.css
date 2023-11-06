@@ -7,6 +7,12 @@
   overflow: hidden;
   background-color: white;
   cursor: pointer;
+  word-wrap: break-word;
+}
+
+.pinContainer {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .item > p {

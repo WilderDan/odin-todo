@@ -22,7 +22,7 @@ function EditItemState(addItemCallback, editItemCallback, deleteItemCallback) {
   const rightSideControls = document.createElement("div");
   rightSideControls.classList.add(styles.rightSideControls);
 
-  const pin = Pin(false, null);
+  const pin = Pin();
 
   const deleteImg = document.createElement("img");
   deleteImg.classList.add(styles.deleteImg);

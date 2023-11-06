@@ -1,8 +1,9 @@
 class Note {
-  constructor(id, title, description) {
+  constructor(id, title, description, isPinned) {
     this._id = id;
     this.title = title;
     this.description = description;
+    this.isPinned = isPinned;
   }
 
   get id() {
@@ -23,6 +24,14 @@ class Note {
 
   set description(value) {
     this._description = value;
+  }
+
+  get isPinned() {
+    return this._isPinned;
+  }
+
+  set isPinned(value) {
+    this._isPinned = value;
   }
 }
 

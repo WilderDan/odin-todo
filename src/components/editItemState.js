@@ -1,5 +1,5 @@
 import styles from "./editItemState.css";
-
+import Pin from "./pin.js";
 import BackImg from "./images/back.svg";
 import DeleteImg from "./images/delete.svg";
 
@@ -19,14 +19,22 @@ function EditItemState(addItemCallback, editItemCallback, deleteItemCallback) {
   backImg.alt = "back button";
   backImg.addEventListener("click", handleBackClick);
 
+  const rightSideControls = document.createElement("div");
+  rightSideControls.classList.add(styles.rightSideControls);
+
+  const pin = Pin(false, null);
+
   const deleteImg = document.createElement("img");
   deleteImg.classList.add(styles.deleteImg);
   deleteImg.src = DeleteImg;
   deleteImg.alt = "delete button";
   deleteImg.addEventListener("click", handleDeleteClick);
 
+  rightSideControls.appendChild(pin.getElement());
+  rightSideControls.appendChild(deleteImg);
+
   controlContainer.appendChild(backImg);
-  controlContainer.appendChild(deleteImg);
+  controlContainer.appendChild(rightSideControls);
 
   item.appendChild(controlContainer);
 
@@ -49,9 +57,14 @@ function EditItemState(addItemCallback, editItemCallback, deleteItemCallback) {
 
   function handleBackClick() {
     if (isEdit) {
-      editItemCallback(itemId, titleText.value, descriptionText.value);
+      editItemCallback(
+        itemId,
+        titleText.value,
+        descriptionText.value,
+        pin.getState()
+      );
     } else {
-      addItemCallback(titleText.value, descriptionText.value);
+      addItemCallback(titleText.value, descriptionText.value, pin.getState());
     }
   }
 
@@ -70,11 +83,13 @@ function EditItemState(addItemCallback, editItemCallback, deleteItemCallback) {
       itemId = null;
       titleText.value = "";
       descriptionText.value = "";
+      pin.update(false);
     } else {
       isEdit = true;
       itemId = item.id;
       titleText.value = item.title;
       descriptionText.value = item.description;
+      pin.update(item.isPinned);
     }
   }
 

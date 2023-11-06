@@ -12,7 +12,12 @@ function App() {
   appElem.classList.add(styles.app);
 
   const homeState = HomeState(itemList, changeToAddState, changeToEditState);
-  const editItemState = EditItemState(handleAdd, handleEdit, handleDelete);
+  const editItemState = EditItemState(
+    handleAdd,
+    handleEdit,
+    handleDelete,
+    handlePin
+  );
 
   appElem.appendChild(homeState.getElement());
 
@@ -31,9 +36,9 @@ function App() {
     changeState(editItemState);
   }
 
-  function handleAdd(title, desc) {
+  function handleAdd(title, desc, isPinned) {
     if (title !== "" || desc !== "") {
-      const note = new Note(currentId++, title, desc);
+      const note = new Note(currentId++, title, desc, isPinned);
       itemList.push(note);
       homeState.update(itemList);
     }
@@ -41,9 +46,10 @@ function App() {
     changeState(homeState);
   }
 
-  function handleEdit(id, title, desc) {
+  function handleEdit(id, title, desc, isPinned) {
     getItem(id).title = title;
     getItem(id).description = desc;
+    getItem(id).isPinned = isPinned;
     homeState.update(itemList);
     changeState(homeState);
   }
@@ -53,6 +59,8 @@ function App() {
     homeState.update(itemList);
     changeState(homeState);
   }
+
+  function handlePin(id) {}
 
   function getItem(id) {
     const findIndex = itemList.findIndex((e) => e.id === id);

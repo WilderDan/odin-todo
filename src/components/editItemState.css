@@ -10,11 +10,17 @@
   justify-content: space-between;
 }
 
+.rightSideControls {
+  display: flex;
+  gap: 1rem;
+}
+
 .backImg {
   width: 50px;
   cursor: pointer;
 }
 
+.pinImg,
 .deleteImg {
   width: 35px;
   cursor: pointer;

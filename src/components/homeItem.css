@@ -1,4 +1,6 @@
 .item {
+  display: flex;
+  flex-direction: column;
   width: 200px;
   height: 200px;
   border: 3px solid #ff0060;
@@ -10,9 +12,10 @@
   word-wrap: break-word;
 }
 
-.pinContainer {
+.controlContainer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  margin-top: auto;
 }
 
 .item > p {

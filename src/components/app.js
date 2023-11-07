@@ -15,7 +15,8 @@ function App() {
     itemList,
     changeToAddState,
     changeToEditState,
-    handlePin
+    handlePin,
+    handleDelete
   );
   const editItemState = EditItemState(handleAdd, handleEdit, handleDelete);
 

@@ -1,7 +1,8 @@
 import styles from "./homeItem.css";
 import Pin from "./pin.js";
+import Trash from "./trash.js";
 
-function HomeItem(item, editItemCallback, pinCallback) {
+function HomeItem(item, editItemCallback, pinCallback, trashCallback) {
   const MAX_TITLE = 24;
   const MAX_DESC = 72;
 
@@ -19,19 +20,25 @@ function HomeItem(item, editItemCallback, pinCallback) {
   description.innerText = truncateExcess(item.description, MAX_DESC);
 
   const pin = Pin(24, item.isPinned, handlePinClick);
+  const trash = Trash(24, handleTrashClick);
 
-  const pinContainer = document.createElement("div");
-  pinContainer.classList.add(styles.pinContainer);
-  pinContainer.appendChild(pin.getElement());
+  const controlContainer = document.createElement("div");
+  controlContainer.classList.add(styles.controlContainer);
+  controlContainer.appendChild(pin.getElement());
+  controlContainer.appendChild(trash.getElement());
 
-  itemElem.appendChild(pinContainer);
   itemElem.appendChild(title);
   itemElem.appendChild(description);
+  itemElem.appendChild(controlContainer);
 
   itemElem.addEventListener("click", () => editItemCallback(item.id));
 
   function handlePinClick() {
     pinCallback(item.id);
+  }
+
+  function handleTrashClick() {
+    trashCallback(item.id);
   }
 
   function truncateExcess(str, limit) {

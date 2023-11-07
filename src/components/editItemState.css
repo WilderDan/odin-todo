@@ -20,8 +20,7 @@
   cursor: pointer;
 }
 
-.pinImg,
-.deleteImg {
+.pinImg {
   width: 35px;
   cursor: pointer;
 }

@@ -1,7 +1,7 @@
 import styles from "./editItemState.css";
 import Pin from "./pin.js";
+import Trash from "./trash.js";
 import BackImg from "./images/back.svg";
-import DeleteImg from "./images/delete.svg";
 
 function EditItemState(addItemCallback, editItemCallback, deleteItemCallback) {
   let isEdit = false;
@@ -22,16 +22,11 @@ function EditItemState(addItemCallback, editItemCallback, deleteItemCallback) {
   const rightSideControls = document.createElement("div");
   rightSideControls.classList.add(styles.rightSideControls);
 
-  const pin = Pin();
-
-  const deleteImg = document.createElement("img");
-  deleteImg.classList.add(styles.deleteImg);
-  deleteImg.src = DeleteImg;
-  deleteImg.alt = "delete button";
-  deleteImg.addEventListener("click", handleDeleteClick);
+  const pin = Pin(35);
+  const trash = Trash(35, handleDeleteClick);
 
   rightSideControls.appendChild(pin.getElement());
-  rightSideControls.appendChild(deleteImg);
+  rightSideControls.appendChild(trash.getElement());
 
   controlContainer.appendChild(backImg);
   controlContainer.appendChild(rightSideControls);
@@ -69,12 +64,7 @@ function EditItemState(addItemCallback, editItemCallback, deleteItemCallback) {
   }
 
   function handleDeleteClick() {
-    const confirmed =
-      titleText.value === "" && descriptionText.value === ""
-        ? true
-        : confirm("Delete?");
-
-    if (confirmed) deleteItemCallback(itemId);
+    deleteItemCallback(itemId);
   }
 
   function update(item) {

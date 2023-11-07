@@ -41,7 +41,7 @@ function App() {
     if (title !== "" || desc !== "") {
       const note = new Note(currentId++, title, desc, isPinned);
       itemList.push(note);
-      homeState.update(itemList);
+      homeState.render(itemList);
     }
 
     changeState(homeState);
@@ -51,20 +51,20 @@ function App() {
     getItem(id).title = title;
     getItem(id).description = desc;
     getItem(id).isPinned = isPinned;
-    homeState.update(itemList);
+    homeState.render(itemList);
     changeState(homeState);
   }
 
   function handleDelete(id) {
     removeItem(id);
-    homeState.update(itemList);
+    homeState.render(itemList);
     changeState(homeState);
   }
 
   function handlePin(id) {
     const item = getItem(id);
     getItem(id).isPinned = !getItem(id).isPinned;
-    homeState.update(itemList);
+    homeState.render(itemList);
   }
 
   function getItem(id) {

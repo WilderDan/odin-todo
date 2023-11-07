@@ -11,19 +11,12 @@ function HomeItemContainer(
   const itemContainerElem = document.createElement("div");
   itemContainerElem.classList.add(styles.itemContainer);
 
-  function update(list) {
-    removeAllChildren();
+  removeAllChildren();
 
-    for (let item of list) {
-      itemContainerElem.appendChild(
-        HomeItem(
-          item,
-          editItemCallback,
-          pinCallback,
-          trashCallback
-        ).getElement()
-      );
-    }
+  for (let item of itemList) {
+    itemContainerElem.appendChild(
+      HomeItem(item, editItemCallback, pinCallback, trashCallback).getElement()
+    );
   }
 
   function removeAllChildren() {
@@ -36,7 +29,7 @@ function HomeItemContainer(
     return itemContainerElem;
   }
 
-  return { getElement, update };
+  return { getElement };
 }
 
 export default HomeItemContainer;
